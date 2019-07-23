@@ -1,23 +1,27 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 import { WeatherService } from './weather/weather.service';
+import { WeatherModel } from './weather/Weather.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Dashboard';
-  weather: any[] = [];
+  weather: WeatherModel;
 
   constructor(
-    private http: HttpClient,
     private weatherService: WeatherService
   ) {
-    this.weatherService.refresh();
   }
 
+  ngOnInit() {
+    this.weatherService.getWeather().subscribe(
+      value => {
+        this.weather = value;
+      });
+    console.log(this.weatherService.getWeather().subscribe());
+  }
 
 }

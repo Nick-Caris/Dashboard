@@ -17,5 +17,8 @@
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
   </li>
 </ul>
+<p> U bent op {{ this.weather.location }}, het is vandaag {{ this.weather.temp }} graden, het voelt {{ this.weather.feelTemp }} graden en het gaat zoveel {{ this.weather.rain }} regenen</p>
+
+<div *ngIf="weather.alert">ALARM</div>
 
 <router-outlet></router-outlet>
