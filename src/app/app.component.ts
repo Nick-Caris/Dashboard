@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
       value => {
         this.weather = value;
       });
-    console.log(this.weatherService.getWeather().subscribe());
   }
 
 }
