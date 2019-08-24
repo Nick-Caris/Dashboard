@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from './weather/weather.service';
 import { WeatherModel } from './weather/Weather.model';
-import { LocationService } from './location/location.service';
+import { LocationService } from './location/Location.service';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +21,17 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.weatherService.getWeather().subscribe(
       value => {
+        console.log('weather updated');
         this.weather = value;
       });
-    console.log(this.locationService.getLocation());
+
+    this.locationService.getCoordinates().then(function (result) {
+      console.log(result);
+    });
+
+    this.locationService.getLocation().then(function (result) {
+      console.log(result);
+    });
 
   }
-
 }
