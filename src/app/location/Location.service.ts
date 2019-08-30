@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Coordinates, Location } from './Location.models';
-import { HttpClient } from '@angular/common/http';
-import { Config } from '../../../config/config';
+import { Coordinates } from './Location.models';
+import { Location } from './Location.models';
+import api_keys from 'config/api.json';
+
 
 const GEOLOCATION_ERRORS = {
   'errors.location.unsupportedBrowser': 'Browser does not support location services',
@@ -17,7 +19,7 @@ const GEOLOCATION_ERRORS = {
 export class LocationService {
   options: any;
 
-  constructor(private http: HttpClient, private config: Config) {
+  constructor(private http: HttpClient) {
     this.options = {
       enableHighAccuracy: true,
       timeout: 5000,
@@ -87,7 +89,7 @@ export class LocationService {
 
     return this.http.get
     (`https://maps.googleapis.com/maps/api/geocode/json?latlng=
-     ${coordinates.longitude},${coordinates.latitude}&key=${this.config.getEnv('Google_API')}`)
+     ${coordinates.longitude},${coordinates.latitude}&key=${api_keys.Google_API}`)
       .pipe(map(value => {
         return new Location(
           value['results'][9]['formatted_address'],
