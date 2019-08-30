@@ -1,3 +1,6 @@
+/**
+ * Class WeatherModel
+ */
 export class WeatherModel {
   private readonly _location;
   private readonly _alert;
@@ -26,7 +29,7 @@ export class WeatherModel {
     return this._feelTemp;
   }
 
-  constructor(location, alert, temp, rain, feelTemp) {
+  constructor(location, alert = 0, temp, rain, feelTemp) {
     this._location = location;
     this._alert = alert;
     this._temp = temp;
