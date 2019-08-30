@@ -25,7 +25,6 @@ export class LocationService {
       timeout: 5000,
       maximumAge: 0
     };
-    // this.API_KEY = 'AIzaSyAmWsSthmtztBYRGFLHBj1tCcaMiSFIwKY';
   }
 
 
