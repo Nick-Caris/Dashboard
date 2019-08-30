@@ -14,9 +14,9 @@ export class WeatherService {
   /***
    * Returns the weather for a given city in The Netherlands
    */
-  public getWeather(): Observable<WeatherModel> {
+  public getWeather(city): Observable<WeatherModel> {
     return this.http.get
-    (`http://weerlive.nl/api/json-data-10min.php?key=${api_keys.Weerlive_API}&locatie=Nijmegen`)
+    (`http://weerlive.nl/api/json-data-10min.php?key=${api_keys.Weerlive_API}&locatie=${city}`)
       .pipe(map(data => {
         data = data['liveweer'][0];
         return new WeatherModel(data['plaats'], data['alarm'], data['temp'], data['d0neerslag'], data['gtemp']);

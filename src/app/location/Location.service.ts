@@ -80,7 +80,7 @@ export class LocationService {
   /**
    * converts lat and long to a Location object using the google API
    */
-  public async getLocation(): Promise<any> {
+  public async getLocation(): Promise<Location> {
 
     const coordinates = await this.getCoordinates().then(function (result) {
       return result;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WeatherService } from './weather/weather.service';
 import { WeatherModel } from './weather/Weather.model';
 import { LocationService } from './location/Location.service';
+import { Location } from './location/Location.models';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { LocationService } from './location/Location.service';
 export class AppComponent implements OnInit {
   title = 'Dashboard';
   weather: WeatherModel;
+  location: Location;
 
   constructor(
     private weatherService: WeatherService,
@@ -18,20 +20,18 @@ export class AppComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
-    this.weatherService.getWeather().subscribe(
+  async ngOnInit() {
+
+    this.location = await this.locationService.getLocation().then(function (result) {
+      console.log(result);
+      return result;
+    });
+
+    this.weatherService.getWeather(this.location.city).subscribe(
       value => {
         console.log('weather updated');
         this.weather = value;
       });
-
-    this.locationService.getCoordinates().then(function (result) {
-      console.log(result);
-    });
-
-    this.locationService.getLocation().then(function (result) {
-      console.log(result);
-    });
 
   }
 }
