@@ -43,4 +43,4 @@ testem.log
 Thumbs.db
 
 # API keys
-config/env.json
+config/api.json
